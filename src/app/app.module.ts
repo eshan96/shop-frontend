@@ -7,27 +7,50 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './services/auth.service';
-import { HomeComponent } from './home/home.component';
+
 import { LoginComponent } from './login/login.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { UserDashboardComponent } from './customer/user-dashboard/user-dashboard.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AdminDashboardComponent,
+    NoAccessComponent,
+    UserDashboardComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: '', component: HomeComponent},
-      {path: 'login', component: LoginComponent}
+      {path: '', component: LoginComponent},
+      {
+        path: 'admin-home', 
+        component: AdminDashboardComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {path: 'no-access', component: NoAccessComponent},
+      {
+        path: 'user-home', 
+        component: UserDashboardComponent,
+        canActivate: [AuthGuard]   
+      },
+      {path: 'sign-up', component: SignUpComponent}
     ]
 )
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

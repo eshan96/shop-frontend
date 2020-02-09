@@ -9,7 +9,8 @@ import { AuthService } from './../services/auth.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-   
+     invalidLogin: boolean 
+
   constructor(
     private authService: AuthService,
     private router: Router) { }
@@ -18,11 +19,14 @@ export class LoginComponent {
     this.authService.login(credentials)
     .subscribe(response => {
       console.log(response.json())
-      if(response.json().data.decoded._id === '5dff85d18f99c14a01fdeaa3') {
-        this.router.navigate(['/'])
-      }else{
-        console.log('It is admin user')
+      localStorage.setItem('token', response.json().data.token);
+      if(response.json().data.decoded.isAdmin == true) {
+        this.router.navigate(['/admin-home'])
+      }else if(response.json().data.decoded.isAdmin == false){
+        this.router.navigate(['/user-home'])
       }
+        this.invalidLogin = true;
+      
     },
     error => {
       console.log('Error in code', error)
