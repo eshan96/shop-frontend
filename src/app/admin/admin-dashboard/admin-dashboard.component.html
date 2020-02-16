@@ -1,6 +1,16 @@
-<p>
-  Welcome to the admin dashboard!
-</p>
+<bs-navbar></bs-navbar>
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <a class="nav-link" (click) = "authService.logout()">Logout</a>
+  </li>
+  </ul>
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1>Bootstrap starter template</h1>
+    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+  </div>
+
+</main><!-- /.container -->
 
 
-<a (click) = "authService.logout()">Logout</a>

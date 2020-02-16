@@ -1,0 +1,20 @@
+<bs-navbar></bs-navbar>
+
+
+<form  #f="ngForm" (ngSubmit) = "addProduct(f.value); f.reset()">
+  <h2>Add new product</h2>
+  <!-- <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password.</div> -->
+    <label for="inputProductName" class="sr-only">Product Name</label>
+    <input type="text" id="inputProductName" name="product_name" ngModel class="form-control" placeholder="Product Name...." required autofocus>
+    <br>
+    <label for="inputProductType" class="sr-only">Product Type</label>
+    <input type="text" id="inputProductType" name="product_type" ngModel class="form-control" placeholder="Product Type...." required>
+    <br>
+    <label for="inputProductBrand" class="sr-only">Product Brand</label>
+    <input type="text" id="inputProductBrand" name="product_brand" ngModel class="form-control" placeholder="Product Brand...." required>
+    <br>
+    <label for="inputProductAvailability" class="sr-only">Product Availability</label>
+    <input type="text" id="inputProductAvailability" name="product_availability" ngModel class="form-control" placeholder="Product Availability...." required>
+    <br> 
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+  </form>

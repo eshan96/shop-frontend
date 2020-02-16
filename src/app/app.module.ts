@@ -15,6 +15,11 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { UserDashboardComponent } from './customer/user-dashboard/user-dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { AdminAddProductService } from './services/admin-add-product.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
 
 
 @NgModule({
@@ -24,7 +29,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     AdminDashboardComponent,
     NoAccessComponent,
     UserDashboardComponent,
-    SignUpComponent
+    SignUpComponent,
+    AddProductComponent,
+    BsNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,14 +50,21 @@ import { SignUpComponent } from './sign-up/sign-up.component';
         component: UserDashboardComponent,
         canActivate: [AuthGuard]   
       },
-      {path: 'sign-up', component: SignUpComponent}
+      {path: 'sign-up', component: SignUpComponent},
+      {
+        path: 'admin/add-product',
+        component: AddProductComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      }
     ]
-)
+),
+     FlashMessagesModule.forRoot()
   ],
   providers: [
     AuthService,
     AuthGuard,
-    AdminAuthGuard
+    AdminAuthGuard,
+    AdminAddProductService
   ],
   bootstrap: [AppComponent]
 })

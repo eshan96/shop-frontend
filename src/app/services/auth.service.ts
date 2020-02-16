@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http'
 import { Router } from '@angular/router'
 import { JwtHelper } from 'angular2-jwt';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 import 'rxjs/add/operator/map'
 import { map } from 'rxjs/operator/map';
@@ -9,7 +10,9 @@ import { map } from 'rxjs/operator/map';
 @Injectable()
 export class AuthService {
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: Http,
+     private router: Router,
+     private flashMessage: FlashMessagesService) { }
 
   // signUp(input) {
   //   const options = { headers: new Headers({ 'Content-Type': 'application/json' }) };
@@ -40,6 +43,7 @@ export class AuthService {
 
   logout() {
       localStorage.removeItem('token');
+      this.flashMessage.show('Logged out successfully !');
       this.router.navigate(['/'])
 
   }
