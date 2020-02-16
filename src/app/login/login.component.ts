@@ -3,6 +3,7 @@ import { Http } from '@angular/http'
 import { Router } from '@angular/router'
 import { AuthService } from './../services/auth.service'
 import { FlashMessagesService } from 'angular2-flash-messages';
+const Noty = require('noty')
 
 @Component({
   selector: 'login',
@@ -23,7 +24,14 @@ export class LoginComponent {
       console.log(response.json())
       localStorage.setItem('token', response.json().data.token);
       if(response.json().data.decoded.isAdmin == true) {
-        this.flashMessage.show('Successfully logged in');
+        this.flashMessage.show('Successfully logged in', {cssClass: 'alert-success', timeout: 1500});
+        // new Noty({
+        //   theme: 'relax',
+        //   text: '',
+        //   type: 'success',
+        //   layout: 'topRight',
+        //   timeout: 1500
+        // }).show()
         this.router.navigate(['/admin-home'])
       }else if(response.json().data.decoded.isAdmin == false){
         this.router.navigate(['/user-home'])

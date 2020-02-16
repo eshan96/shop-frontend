@@ -43,7 +43,7 @@ export class AuthService {
 
   logout() {
       localStorage.removeItem('token');
-      this.flashMessage.show('Logged out successfully !');
+      this.flashMessage.show('Logged out successfully !', {cssClass: 'alert-success', timeout: 1500});
       this.router.navigate(['/'])
 
   }
